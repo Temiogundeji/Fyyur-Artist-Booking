@@ -127,9 +127,9 @@ def show_venue(venue_id):
 
   for show in all_past_shows:
       past_show = {
-        "venue_id": show.venues.id,
-        "venue_name": show.venues.name,
-        "image_link": show.venues.image_link,
+        "artist_id": show.artists.id,
+        "artist_name": show.artists.name,
+        "artist_image_link": show.artists.image_link,
         "start_time": show.start_time.strftime("%m/%d/%Y, %H:%M:%S")
       }
       temp_past_shows.append(past_show)
@@ -137,10 +137,10 @@ def show_venue(venue_id):
 
   for show in all_upcoming_shows:
     current_upcoming_show = {
-      "venue_id":show.venue.id,
-      "venue_name": show.venue.venue_name,
-      "venue_image_link": show.venue.image_link,
-      "start_time": show.venue["start_time"].strftime("%m/%d/%Y, %H:%M:%S")
+      "artist_id":show.artists.id,
+      "artist_name": show.artists.venue_name,
+      "artist_image_link": show.artists.image_link,
+      "start_time": show.start_time.strftime("%m/%d/%Y, %H:%M:%S")
     }
     temp_upcoming_shows.append(current_upcoming_show)
     setattr(venue, "upcoming_show", temp_upcoming_shows)
@@ -291,10 +291,10 @@ def show_artist(artist_id):
 
     for show in all_upcoming_shows:
       current_upcoming_show = {
-        "venue_id":show.venue.id,
-        "venue_name": show.venue.name,
-        "venue_image_link": show.venue.image_link,
-        "start_time": show.venue["start_time"].strftime("%m/%d/%Y, %H:%M:%S")
+        "venue_id":show.venues.id,
+        "venue_name": show.venues.name,
+        "venue_image_link": show.venues.image_link,
+        "start_time": show.start_time.strftime("%m/%d/%Y, %H:%M:%S")
       }
       temp_upcoming_shows.append(current_upcoming_show)
       setattr(artist, "upcoming_show", temp_upcoming_shows)
