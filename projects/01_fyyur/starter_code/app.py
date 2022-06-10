@@ -58,9 +58,7 @@ def venues():
   try:
       results = Venue.query.distinct(Venue.city, Venue.state).all()
       for result in results:
-        resultDict = {
-          "city": result.city,
-          "state": result.state,
+        resultDict = { "city": result.city, "state": result.state,
         }
         venues = Venue.query.filter_by(city = result.city, state = result.state).all()
 
@@ -119,6 +117,7 @@ def show_venue(venue_id):
   # TODO: replace with real venue data from the venues table, using venue_id
   venue = Venue.query.get(venue_id)
   setattr(venue, "genres", venue.genres.split(","))
+  setattr(venue, "seeking_description", venue.seeking_desc)
 
   all_past_shows = get_past_shows(venue.shows)
   all_upcoming_shows =  get_upcoming_shows(venue.shows)
@@ -140,7 +139,7 @@ def show_venue(venue_id):
     current_upcoming_show = {
       "venue_id":show.venue.id,
       "venue_name": show.venue.venue_name,
-      "venue_image_link": show.venue.venue_image_link,
+      "venue_image_link": show.venue.image_link,
       "start_time": show.venue["start_time"].strftime("%m/%d/%Y, %H:%M:%S")
     }
     temp_upcoming_shows.append(current_upcoming_show)
@@ -283,7 +282,7 @@ def show_artist(artist_id):
       past_show = {
         "venue_id": show.venues.id,
         "venue_name":   show.venues.name,
-        "venue_image_link": show.venues.venue_image_link,
+        "venue_image_link": show.venues.image_link,
         "start_time": show.start_time.strftime("%m/%d/%Y, %H:%M:%S")
       }
 
